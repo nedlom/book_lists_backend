@@ -2,7 +2,11 @@ class Api::V1::BooksController < ApplicationController
 
   def index
     books = Book.all
-    render json: books
+    # render json: books
+    # options = {
+    #   include: [:genre]
+    # }
+    render json: BookSerializer.new(books)
   end
 
   def create
@@ -10,7 +14,7 @@ class Api::V1::BooksController < ApplicationController
     if book.save
       render jason: book, status: :accepted
     else
-      render json: {errors: syllabus.errors.full_messages}, status: :unprocessible_entity}
+      render json: {errors: syllabus.errors.full_messages}, status: :unprocessible_entity
     end
   end
 
